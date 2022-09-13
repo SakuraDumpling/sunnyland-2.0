@@ -50,7 +50,11 @@ public class PalyerController : MonoBehaviour
 
             //动画效果
             //因为facedircetion获得的数据会有负数，负数会导致动画切换到另外一个状态，所以需要取绝对值.所以需要用到Mathf函数
-            anim.SetFloat("running",Mathf.Abs(facedircetion));
+            anim.SetBool("running", true);
+        }else
+        {
+            //如果不等于0的时候效果是false
+            anim.SetBool("running", false);
         }
         //判断是面向不是0的时候是左还是右
         if (facedircetion != 0)
