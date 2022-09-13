@@ -4,47 +4,47 @@ using UnityEngine;
 
 public class PalyerController : MonoBehaviour
 {
-    //»ñµÃ¸ÕÌå
+    //èŽ·å¾—åˆšä½“
     public Rigidbody2D rb;
-    //ÉùÃ÷Ò»¸öËÙ¶È£¨ÒÆ¶¯¹ý³ÌÖÐÐèÒªËÙ¶È£©
+    //å£°æ˜Žä¸€ä¸ªé€Ÿåº¦ï¼ˆç§»åŠ¨è¿‡ç¨‹ä¸­éœ€è¦é€Ÿåº¦ï¼‰
     public float speed;
 
     // Start is called before the first frame update
-    //ÓÎÏ·Ò»¿ªÊ¼»áÖ´ÐÐµÄ
+    //æ¸¸æˆä¸€å¼€å§‹ä¼šæ‰§è¡Œçš„
     void Start()
     {
 
     }
 
     // Update is called once per frame
-    //ÔËÐÐÓÎÏ·Ê±ÖðÖ¡¸üÐÂµÄÄÚÈÝ
+    //è¿è¡Œæ¸¸æˆæ—¶é€å¸§æ›´æ–°çš„å†…å®¹
     void Update()
     {
-        //µ÷ÓÃÒÆ¶¯º¯Êý
+        //è°ƒç”¨ç§»åŠ¨å‡½æ•°
         Movement();
     }
 
 
-    //¸ºÔðÒÆ¶¯µÄº¯Êý
+    //è´Ÿè´£ç§»åŠ¨çš„å‡½æ•°
     void Movement()
     {
-        //¶¨ÒåÒ»¸ö±äÁ¿ÓÃÓÚ³Ð×°ÊäÈëµÄÄÇ¸ö²ÎÊý£¬·½±ãÖ®ºóÅÐ¶Ï
-        //»ñµÃÍæ¼ÒºáÏòÊäÈëµÄÖµ£¬»á»ñµÃ3¸öÊý×ÖÐÍµÄÖµ£¬0,1£¬-1
+        //å®šä¹‰ä¸€ä¸ªå˜é‡ç”¨äºŽæ‰¿è£…è¾“å…¥çš„é‚£ä¸ªå‚æ•°ï¼Œæ–¹ä¾¿ä¹‹åŽåˆ¤æ–­
+        //èŽ·å¾—çŽ©å®¶æ¨ªå‘è¾“å…¥çš„å€¼ï¼Œä¼šèŽ·å¾—3ä¸ªæ•°å­—åž‹çš„å€¼ï¼Œ0,1ï¼Œ-1
         float horizontalmove = Input.GetAxis("Horizontal");
-        //ÉùÃ÷Ò»¸ö±äÁ¿ÓÃÀ´½ÓÊÕ»ñµÃµÄÎ»ÖÃÐÅÏ¢£¬Õâ¸öº¯ÊýGetAxisRawÖ»ÄÜ¹»½ÓÊÕ1,0£¬-1£¬¸ü·½±ãºóÐøÅÐ¶ÏÊÇ·ñ×ªÏò
+        //å£°æ˜Žä¸€ä¸ªå˜é‡ç”¨æ¥æŽ¥æ”¶èŽ·å¾—çš„ä½ç½®ä¿¡æ¯ï¼Œè¿™ä¸ªå‡½æ•°GetAxisRawåªèƒ½å¤ŸæŽ¥æ”¶1,0ï¼Œ-1ï¼Œæ›´æ–¹ä¾¿åŽç»­åˆ¤æ–­æ˜¯å¦è½¬å‘
         float facedircetion = Input.GetAxisRaw("Horizontal");
 
-        //ÅÐ¶ÏÌõ¼þ
+        //åˆ¤æ–­æ¡ä»¶
         if (horizontalmove != 0)
         {
-            //»ñµÃËÙ¶ÈµÄ±ä»¯,vector2¾ÍÊÇ2dÆ½ÃæÉÏµÄx,yÖáÒÆ¶¯Ê±ºòµÄ±ä»¯£¬3¾ÍÊÇ3d²ãÃæµÄ
-            //Vector2dµÄ²ÎÊý£¬£¨x£¬y£©¡£ÕâÀïÊÇºáÏòÒÆ¶¯£¬ËùÒÔyÖáÎÞ±ä»¯£¬Ö±½Ó»ñÈ¡ÏÖÔÚËùÔÚµÄÎ»ÖÃ¼´¿É
+            //èŽ·å¾—é€Ÿåº¦çš„å˜åŒ–,vector2å°±æ˜¯2då¹³é¢ä¸Šçš„x,yè½´ç§»åŠ¨æ—¶å€™çš„å˜åŒ–ï¼Œ3å°±æ˜¯3då±‚é¢çš„
+            //Vector2dçš„å‚æ•°ï¼Œï¼ˆxï¼Œyï¼‰ã€‚è¿™é‡Œæ˜¯æ¨ªå‘ç§»åŠ¨ï¼Œæ‰€ä»¥yè½´æ— å˜åŒ–ï¼Œç›´æŽ¥èŽ·å–çŽ°åœ¨æ‰€åœ¨çš„ä½ç½®å³å¯
             rb.velocity = new Vector2(horizontalmove * speed, rb.velocity.y);
         }
-        //ÅÐ¶ÏÊÇÃæÏò²»ÊÇ0µÄÊ±ºòÊÇ×ó»¹ÊÇÓÒ
+        //åˆ¤æ–­æ˜¯é¢å‘ä¸æ˜¯0çš„æ—¶å€™æ˜¯å·¦è¿˜æ˜¯å³
         if (facedircetion != 0)
         {
-            //unityÀïµÄ½ÇÉ«µÄtransform²ÎÊýµÈÓÚÒ»¸öÐÂµÄÈýÎ¬²ÎÊý£¬ÕâÀï×ªÏò½ö½öÐèÒªxÖáµÄ×ªÏò£¬ËùÒÔÆäËûÁ½¸öÖáÄ¬ÈÏÒÔunityÀïµÄÊýÖµÎª×¼
+            //unityé‡Œçš„è§’è‰²çš„transformå‚æ•°ç­‰äºŽä¸€ä¸ªæ–°çš„ä¸‰ç»´å‚æ•°ï¼Œè¿™é‡Œè½¬å‘ä»…ä»…éœ€è¦xè½´çš„è½¬å‘ï¼Œæ‰€ä»¥å…¶ä»–ä¸¤ä¸ªè½´é»˜è®¤ä»¥unityé‡Œçš„æ•°å€¼ä¸ºå‡†
             transform.localScale = new Vector3(facedircetion, 1, 1);
         }
     }
