@@ -6,8 +6,12 @@ public class PalyerController : MonoBehaviour
 {
     //获得刚体
     public Rigidbody2D rb;
-    //声明动画切换的组件
+    //获得动画切换的组件
     public Animator anim;
+    //获得地面的信息
+    public LayerMask ground;
+    //获得player的碰撞体
+    public BoxCollider2D coll;
 
     //声明一个速度（移动过程中需要速度）
     public float speed;
@@ -28,6 +32,8 @@ public class PalyerController : MonoBehaviour
     {
         //调用移动函数
         Movement();
+        //调用跳跃动画切换函数
+        SwitchAnim();
     }
 
 
@@ -67,7 +73,36 @@ public class PalyerController : MonoBehaviour
         //判断jump的按键按下的时候跳跃
         if(Input.GetButtonDown("Jump"))
         {
+            //跳起的速度
             rb.velocity = new Vector2(rb.velocity.x, jumpforce * Time.fixedDeltaTime);
+            //动画效果
+            anim.SetBool("jumping", true);
+        }
+    }
+
+    //负责下落动画切换的函数
+    void SwitchAnim()
+    {
+        //因为idle成为ture之后会一直保持，所以开始需要给idle赋值为false
+        anim.SetBool("idle", false);
+
+        //只有跳落过程中才会有跳跃动画的切换，判断如果是在跳跃
+        if(anim.GetBool("jumping"))
+        {
+            //如果速度小于零，那么就该触发下落的效果
+            if(rb.velocity.y < 0)
+            {
+                //将两种动画切换过来
+                anim.SetBool("jumping", false);
+                anim.SetBool("falling", true);
+            }
+        }
+        //如果不是上面的情况执行下面的，当碰撞体coll接触到ground执行
+        else if(coll.IsTouchingLayers(ground))
+        {
+            //切换两种动画
+            anim.SetBool("falling", false);
+            anim.SetBool("idle", true);
         }
     }
 }
